@@ -17,6 +17,8 @@ class CreateSlotsTable extends Migration
             $table->bigIncrements('id');
             $table->string('location');
             $table->integer('space');
+            $table->decimal('latitude',8,6);
+            $table->decimal('longtitude',9,6);
             $table->timestamps();
         });
     }

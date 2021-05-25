@@ -32,7 +32,9 @@ class SlotController extends Controller
         $slot=DB::table('slots')
                     ->insert([
                         'location'=> $request->location,
-                        'space'=>$request->space
+                        'space'=>$request->space,
+                        'latitude'=>$request->latitude,
+                        'longtitude'=>$request->longtitude
                     ]);
                    return back()->with('success', 'Space Added successfully ^_^');
     }

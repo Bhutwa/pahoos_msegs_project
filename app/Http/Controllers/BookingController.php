@@ -3,7 +3,7 @@
 namespace PaHooSBooKinG\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Auth;
 use Redirect;
 class BookingController extends Controller
 {
@@ -36,7 +36,7 @@ class BookingController extends Controller
                         'user_id'=> $user_id,
                         'slot_id'=>$slot_id
                     ]);
-                    return view('home');
+                    return back()->with('success', 'Space Added successfully ^_^');
         }
         else {
             return back()->with('error', 'No Space Available in this location ,Please Select another !');

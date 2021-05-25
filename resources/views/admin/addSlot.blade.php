@@ -24,6 +24,14 @@
                                             <label for="space">No of Space</label>
                                             <input type="text" class="form-control" name="space" id="space" placeholder="No of vehical accomodation..">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="latitude">Latitude</label>
+                                            <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude of location..">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="longtitude">No of Space</label>
+                                            <input type="text" class="form-control" name="longtitude" id="longtitude" placeholder="Longtitude of location..">
+                                        </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>

@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "datatables.net-bs": "^1.10.24",
-        "mdb-ui-kit": "^3.6.0"
+        "mdb-ui-kit": "^3.6.0",
+        "vue2-google-maps": "^0.10.7"
     }
 }

@@ -6,6 +6,7 @@ use PaHooSBooKinG\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\request;
 use Redirect;
+use FarhanWazir\GoogleMaps\GMaps;
 class LoginController extends Controller
 {
     /*
@@ -29,10 +30,19 @@ class LoginController extends Controller
     
     protected function authenticated(Request $request, $user) {
         if ($user->role) {
+           
             return Redirect::to('admin/home');
         } 
          else {
-            return redirect('/');
+            $config['center'] = '23.733850,92.716722';
+            $config['zoom'] = '14';
+            $config['map_height'] = '600px';
+    
+            $gmap = new GMaps();
+            $gmap->initialize($config);
+         
+            $map = $gmap->create_map();
+            return view('/home',compact('map'));
         }
    }
    // protected $redirectTo = '/home';

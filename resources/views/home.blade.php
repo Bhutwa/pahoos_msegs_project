@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{!! $map['js'] !!}
 @section('content')   
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
@@ -41,9 +41,8 @@
         </nav>
     </div>
     <!--Container Main start-->
-    <div class="height-100 bg-light">
-        <div id="map"></div>
-                               
+    <div class="height-100 bg-light">        
+        {!! $map['html'] !!}                               
     </div>
     
     <!--Container Main end-->
