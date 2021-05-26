@@ -1,18 +1,22 @@
-<div class="l-navbar" id="nav-bar">
+@extends('layouts.app')
+{{-- {{dd($bookingdetails)}} --}}
+{!! $map['js'] !!}
+@section('content')   
+    <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="#" class="nav_logo"> <i class='bx bxs-car-garage nav_logo-icon'></i> <span class="nav_logo-name">PahooS</span> </a>
                 <div class="nav_list"> 
-                    <a href="#" class="nav_link active"> 
+                    <a href="/home" class="nav_link active"> 
                         <i class='bx bx-grid-alt nav_icon'></i> 
                         <span class="nav_name">Home</span> 
                     </a> 
-                    <a href="/user/book" class="nav_link"> 
+                    <a href="{{route('slots.index')}}" class="nav_link"> 
                         <i class='bx bx-key nav_icon'></i> 
                         <span class="nav_name">Book</span>
                     </a> 
-                    <a href="#" class="nav_link"> 
-                        <i class='bx bx-message-square-detail nav_icon'></i> 
-                        <span class="nav_name">Messages</span>
+                    <a href="/googlemap" class="nav_link"> 
+                        <i class='bx bx-map nav_icon'></i> 
+                        <span class="nav_name">Slots</span>
                     </a>
                     <a href="#" class="nav_link"> 
                         <i class='bx bx-bookmark nav_icon'></i> 
@@ -37,3 +41,12 @@
             
         </nav>
     </div>
+    <!--Container Main start-->
+    <div class="container">
+        {!! $map['html'] !!}
+</div>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-cE1bO24hAFSmGEB0x3cy6OywtD-7SNk">
+</script>
+    <!--Container Main end-->
+@endsection

@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => PaHooSBooKinG\User::class,
+            'model' => App\User::class,
         ],
         // 'slots' => [
         //     'driver' => 'eloquent',

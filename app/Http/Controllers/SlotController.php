@@ -1,16 +1,14 @@
 <?php
-namespace PaHooSBooKinG\Http\Controllers;
+namespace App\Http\Controllers;
+use App\Slot;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use FarhanWazir\GoogleMaps\GMaps;
 
 
 class SlotController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $slots = DB::table('slots')
@@ -20,17 +18,10 @@ class SlotController extends Controller
         // $slots=App\Slot::all();
         // return view('user.book',compact('slots'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         // dd($request->location);
-        $slot=DB::table('slots')
-                    ->insert([
+        $slot=Slot::insert([
                         'location'=> $request->location,
                         'space'=>$request->space,
                         'latitude'=>$request->latitude,
@@ -93,5 +84,27 @@ class SlotController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function map()
+    {
+            $config['center'] = '23.733850,92.716722';
+            $config['zoom'] = '14';
+            $config['map_height'] = '600px';           
+    
+            $gmap = new GMaps();
+            $gmap->initialize($config);
+            // marker
+            $slots=Slot::getAll();
+            
+
+            foreach($slots as $slot){
+                $slot_available=$slot->space - (DB::table('user_slot')->where('user_slot.slot_id','=',$slot->id)->count());
+            $marker['position'] = "$slot->latitude, $slot->longtitude";
+            $marker['infowindow_content'] = "$slot->location,slot available : $slot_available";
+            $gmap->add_marker($marker);
+            }
+            $map = $gmap->create_map();
+            
+            return view('/user/map',compact('map'));
     }
 }

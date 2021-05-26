@@ -1,12 +1,12 @@
 <?php
 
-namespace PaHooSBooKinG\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use PaHooSBooKinG\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\request;
-use Redirect;
-use FarhanWazir\GoogleMaps\GMaps;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 class LoginController extends Controller
 {
     /*
@@ -30,19 +30,10 @@ class LoginController extends Controller
     
     protected function authenticated(Request $request, $user) {
         if ($user->role) {
-           
             return Redirect::to('admin/home');
         } 
-         else {
-            $config['center'] = '23.733850,92.716722';
-            $config['zoom'] = '14';
-            $config['map_height'] = '600px';
-    
-            $gmap = new GMaps();
-            $gmap->initialize($config);
-         
-            $map = $gmap->create_map();
-            return view('/home',compact('map'));
+         else {            
+            return Redirect::to('/home');
         }
    }
    // protected $redirectTo = '/home';

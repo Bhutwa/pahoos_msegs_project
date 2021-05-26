@@ -1,7 +1,10 @@
 <?php
+namespace PaHooSBooKinG\Http\Controllers;
+use \App\Http\Controllers\SlotController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use App\Slot;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +20,27 @@ use Illuminate\Support\Facades\DB;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// <<-----------Models Routes ---------->
+Route::resource('slots','\App\Http\Controllers\SlotController');
+Route::resource('bookings',BookingController::class);
+
+// <<-------------Home Page Routes------------------->>
+Route::get('/', 'HomeController@index');
+//---------------------USER
+Route::get('/home', function(){
+    $slots= Slot::select('location')->get();
+    $bookingdetails=DB::table('user_slot')
+    ->join('slots','slots.id','=','user_slot.slot_id')
+    ->join('users', function ($join) {
+        $join->on('user_slot.user_id', '=', 'users.id');
+    })
+    ->select('user_slot.id','slots.location','users.name','user_slot.start','user_slot.end')
+    ->get();
+    $count=count($bookingdetails);
+    return view('home', ['bookingdetails' => $bookingdetails,'count' => $count,'slots' => $slots]);
+});
+
+//----------------------ADMIN
 Route::get('/admin/home' , function(){
     $bookingdetails = DB::table('user_slot')
             ->join('users', 'users.id', '=', 'user_slot.user_id')
@@ -25,9 +48,17 @@ Route::get('/admin/home' , function(){
             ->select('users.name', 'slots.location','user_slot.id')->get();
     return view('admin.home',['bookingdetails'=> $bookingdetails]);
 });
+
+// <<---------------END -------------->>
+
+
+// <<--------- Google Map Route ----------->>
+Route::get('/googlemap', 'SlotController@map');
+
+//<-----------Piviot Table Route -------->>
 Route::get('/add-slot',function(){
     return view('/admin/addSlot');
 });
-Route::resource('slots', SlotController::class);
-Route::resource('bookings',BookingController::class);
+
+
 

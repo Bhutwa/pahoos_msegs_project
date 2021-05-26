@@ -19,9 +19,9 @@ class CreateUserSlotTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');           
             $table->bigInteger('slot_id')->unsigned();
             $table->foreign('slot_id')->references('id')->on('slots')->onDelete('cascade');
-            $table->date('book_date')->nullable()->default(null);;
-            $table->timestamp('start')->nullable()->default(null);;
-            $table->timestamp('end')->nullable()->default(null);;
+            $table->date('book_date')->nullable()->default(null);
+            $table->time('start')->nullable()->default(null);
+            $table->time('end')->nullable()->default(null);
             $table->timestamps();
             
         });

@@ -170,11 +170,11 @@ return [
         /*
          * Application Service Providers...
          */
-        PaHooSBooKinG\Providers\AppServiceProvider::class,
-        PaHooSBooKinG\Providers\AuthServiceProvider::class,
-        // PaHooSBooKinG\Providers\BroadcastServiceProvider::class,
-        PaHooSBooKinG\Providers\EventServiceProvider::class,
-        PaHooSBooKinG\Providers\RouteServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
     ],
 

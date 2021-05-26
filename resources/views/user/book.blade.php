@@ -55,20 +55,28 @@
     </div>
 @endif
        
-            <div class="card">
-                     <div class="card-header" style="text-align:center">Book Parking Slot</div>
-                <div class="card-body" style="text-align:center">
-                    <label for="country" style="text-allign:center">Select Location:</label>
+    <div class="card">
+        <div class="card-header" style="text-align:center">Book Parking Slot</div>
+            <div class="card-body" style="text-align:center">
+                <div class="form-group">
+                <label for="country" style="text-allign:center">Select Location:</label>
                     <form action="{{route('bookings.create')}}" method="get">
-                    <select name="slot_location" id="slot_location"class="form-control" style="text-align-last:center; width:250px;">
-                    <option value="" >Select Location</option>
-                    @foreach ($slots as $location)
-                    <option value="{{ $location->location }}" >{{$location->location}}</option>
-                    @endforeach
-                </select>  
-                      
-                        <input type="submit" class="btn btn-secondary" value="Select" >
-                        
+                        <select name="slot_location" id="slot_location"class="form-control" style="text-align-last:center; width:250px;">
+                            <option value="" >Select Location</option>
+                            @foreach ($slots as $location)
+                            <option value="{{ $location->location }}" >{{$location->location}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">            
+                        <label for="start" >From:</label>
+                        <input id="start" type="time" class="col-4 form-control" name="start" value="00:00:00" style="text-allign:center" >
+                    </div>
+                    <div class="form-group">
+                        <label for="end" >To:</label>
+                        <input id="end" type="time" class="col-4 form-control" name="end" value="01:00:00" style="text-allign:center" >
+                    </div>    
+                        <input type="submit" class="btn btn-secondary" value="Book Now ->" >                        
                     </form>  
                 </div>
             </div>

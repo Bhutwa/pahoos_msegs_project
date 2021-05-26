@@ -11,18 +11,23 @@
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/usertable.js') }}" defer></script>
     
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
    
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">   
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @auth   
     <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" rel></script>
-    {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.24/datatables.min.js"></script> --}}
      <script src="{{asset('js/sidebar.js') }}" defer></script>
     
     <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
@@ -95,10 +100,6 @@
         </main>
     </div>
     <script src="{{asset('js/app.js')}}"></script>
-    {{-- <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBqDQ6yluEyEKZXt9LymZp8UKmx2TQv10"
-      async
-    ></script> --}}
     
     
 </body>

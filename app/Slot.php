@@ -1,21 +1,21 @@
 <?php
 
-namespace PaHooSBooKinG;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Slot extends Model
 {
     protected $fillable = [
-        'id', 'location','space'
+        'id', 'location','space','latitude','longtitude'
     ];
 
     public function users()
     {
         return $this->belongsToMany(User::class);
     }
-    public function getAll()
+    static public function getAll()
     {
-        return Slots::all();
+        return Slot::all();
     }
 }
