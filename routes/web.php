@@ -1,5 +1,7 @@
 <?php
 namespace PaHooSBooKinG\Http\Controllers;
+
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -58,11 +60,11 @@ Route::get('/add-slot',function(){
 Route::get('/googlemap', 'SlotController@map');
 
 // <<-------------View redirected Routes------>
+
+Route::get('add-feedback','BookingController@feedback')->name('add-feedback');;
+// <<--------------Controller Routes
+
+
 Route::get('/feedback',function(){
-return view('/user/feedback');
-
+    return view('user/feedback');
 });
-
-
-
-

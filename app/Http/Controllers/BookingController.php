@@ -41,7 +41,7 @@ class BookingController extends Controller
         if($slot_count<DB::table('slots')->select('space')->value('space') && $validator){
         var_dump($slot_count);
         $user_id= Auth::id();
-        $book=DB::table('user_slot')
+        DB::table('user_slot')
                     ->insert([
                         'user_id'=> $user_id,
                         'slot_id'=>$slot_id,
@@ -114,5 +114,16 @@ class BookingController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function feedback(Request $request)
+    {
+        
+        DB::table('feedbacks')
+            ->insert([
+                'user_id' => Auth::user()->id,
+                'rating' => $request->rating,
+                'feedback_message' => $request->feedback_message
+            ]);
+            return redirect('/home');
     }
 }

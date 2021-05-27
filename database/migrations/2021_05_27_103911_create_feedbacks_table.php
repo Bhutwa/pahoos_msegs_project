@@ -15,6 +15,9 @@ class CreateFeedbacksTable extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('rating');
+            $table->string('feedback_message');
             $table->timestamps();
         });
     }
