@@ -3,7 +3,7 @@
 @section('content')   
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
-            <div> <a href="#" class="nav_logo"> <i class='bx bxs-car-garage nav_logo-icon'></i> <span class="nav_logo-name">PahooS</span> </a>
+            <div> <a href="/" class="nav_logo"> <i class='bx bxs-car-garage nav_logo-icon'></i> <span class="nav_logo-name">PahooS</span> </a>
                 <div class="nav_list"> 
                     <a href="/home" class="nav_link active"> 
                         <i class='bx bx-grid-alt nav_icon'></i> 
@@ -17,9 +17,9 @@
                         <i class='bx bx-map nav_icon'></i> 
                         <span class="nav_name">Slots</span>
                     </a>
-                    <a href="#" class="nav_link"> 
+                    <a href="/feedback" class="nav_link"> 
                         <i class='bx bx-bookmark nav_icon'></i> 
-                        <span class="nav_name">Bookmark</span> </a>
+                        <span class="nav_name">Feedback</span> </a>
                     <a href="#" class="nav_link"> 
                         <i class='bx bx-folder nav_icon'></i> 
                         <span class="nav_name">Files</span> </a> 
@@ -41,8 +41,11 @@
         </nav>
     </div>
     <!--Container Main start-->
-    <div class="height-100 bg-light">
+    <div class="height-100 bg-light">           
         <div class="container">
+            <div class="container">
+                <img src="image/park.png" style="width:100%;height:200px;padding-top:30px;">
+            </div> 
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
@@ -68,8 +71,9 @@
                             <td>{{$user->name}}</td>
                             <td>PAH000{{$user->id}}</td>
                             <td>{{$user->location}}</td>
-                            <td>{{$user->start}}</td>
-                            <td>{{$user->end}}</td>
+                            {{-- <td>{{strtotime($user->start)->format("H:i A")}}</td> --}}
+                            <td>{{date('h:i A', strtotime($user->start))}}</td>
+                            <td>{{date('h:i A', strtotime($user->end))}}</td>
                             <td>
                                 <a href="#editBooking" class="editBooking"  data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="#deleteBooking" class="deleteBooking"  data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>

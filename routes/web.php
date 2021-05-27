@@ -1,6 +1,5 @@
 <?php
 namespace PaHooSBooKinG\Http\Controllers;
-use \App\Http\Controllers\SlotController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +21,7 @@ Auth::routes();
 
 // <<-----------Models Routes ---------->
 Route::resource('slots','\App\Http\Controllers\SlotController');
-Route::resource('bookings',BookingController::class);
+Route::resource('bookings','\App\Http\Controllers\BookingController');
 
 // <<-------------Home Page Routes------------------->>
 Route::get('/', 'HomeController@index');
@@ -40,7 +39,7 @@ Route::get('/home', function(){
     return view('home', ['bookingdetails' => $bookingdetails,'count' => $count,'slots' => $slots]);
 });
 
-//----------------------ADMIN
+//----------------------ADMIN------Routes---------------------------------
 Route::get('/admin/home' , function(){
     $bookingdetails = DB::table('user_slot')
             ->join('users', 'users.id', '=', 'user_slot.user_id')
@@ -48,17 +47,22 @@ Route::get('/admin/home' , function(){
             ->select('users.name', 'slots.location','user_slot.id')->get();
     return view('admin.home',['bookingdetails'=> $bookingdetails]);
 });
-
-// <<---------------END -------------->>
+//<-----------Piviot Table Route -------->>
+Route::get('/add-slot',function(){
+    return view('/admin/addSlot');
+});
+//-----------------------------END ----------------------------------------
 
 
 // <<--------- Google Map Route ----------->>
 Route::get('/googlemap', 'SlotController@map');
 
-//<-----------Piviot Table Route -------->>
-Route::get('/add-slot',function(){
-    return view('/admin/addSlot');
+// <<-------------View redirected Routes------>
+Route::get('/feedback',function(){
+return view('/user/feedback');
+
 });
+
 
 
 

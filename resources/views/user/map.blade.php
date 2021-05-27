@@ -18,9 +18,9 @@
                         <i class='bx bx-map nav_icon'></i> 
                         <span class="nav_name">Slots</span>
                     </a>
-                    <a href="#" class="nav_link"> 
+                    <a href="/feedback" class="nav_link"> 
                         <i class='bx bx-bookmark nav_icon'></i> 
-                        <span class="nav_name">Bookmark</span> </a>
+                        <span class="nav_name">Feedback</span> </a>
                     <a href="#" class="nav_link"> 
                         <i class='bx bx-folder nav_icon'></i> 
                         <span class="nav_name">Files</span> </a> 
