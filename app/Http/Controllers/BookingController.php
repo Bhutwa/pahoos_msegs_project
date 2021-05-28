@@ -119,7 +119,7 @@ class BookingController extends Controller
      */
     public function destroy(Request $request,$booking_id)
     {
-        dd($booking_id);
+        // dd($booking_id);
        $deleteBooking=DB::table('user_slot')->where('id','=',$booking_id)->delete();
         return redirect('/home');   
     }

@@ -87,10 +87,12 @@
                         </tr>
 
                         <!-- Delete Modal HTML -->
-                        <div id="myDeleteModal{{ $user->id }}" class="modal fade">
+                        <div id="myDeleteModal{{$user->id}}" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form action="{{route('bookings.destroy',$user->id)}}" method="get">
+                                    <form action="{{route('bookings.destroy',$user->id)}}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                        @csrf
                                         <div class="modal-header">						
                                             <h4 class="modal-title">Delete Employee</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -99,11 +101,13 @@
                                             <p>Are you sure you want to delete these Records?</p>
                                             <p class="text-warning"><small>This action cannot be undone.</small></p>
                                         </div>
-                                        <div class="modal-footer">
+                                        
+                                        <div class="modal-footer">                                            
                                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                                             <input type="submit" class="btn btn-danger" value="Delete">
+                                        </form>
                                         </div>
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -113,7 +117,8 @@
                             <div class="col-6 modal-dialog">
                                 <div class="modal-content">
                                     <form action="{{route('bookings.edit',$user->id)}}" method="GET">
-                                        <div class="modal-header">						
+                                        @csrf
+                                        <div class="modal-header">
                                             <h4 class="modal-title">Edit Booking Details</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         </div>
@@ -123,10 +128,10 @@
                                                         <select name="slot_location" id="slot_location"class="form-control" style="text-align-last:center; width:145px;margin-left :54px;">
                                                             <option value="" >Select Location</option>
                                                             @foreach ($slots as $location)
-                                                            <option value="{{ $location->location }}" >{{$location->location}}</option>
+                                                            <option value="{{$location->location }}">{{$location->location}}</option>
                                                             @endforeach
                                                         </select>
-                                                </div>					
+                                                </div>
                                             <div class="form-group" style="display:flex;flex-wrap: wrap;align-items: center; ">            
                                                 <label for="start" >From_:</label>
                                                 <input id="start" type="time" class="col-4 form-control" name="start" value="00:00:00" style="text-allign:center" >
@@ -134,7 +139,7 @@
                                             <div class="form-group" style="display:flex;flex-wrap: wrap;align-items: center; ">
                                                 <label for="end" >To____:</label>
                                                 <input id="end" type="time" class="col-4 form-control" name="end" value="01:00:00" style="text-allign:center" >
-                                            </div>                            
+                                            </div>                   
                                             <div class="modal-footer">
                                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                                                 <input type="submit" class="btn btn-info" value="Save">
