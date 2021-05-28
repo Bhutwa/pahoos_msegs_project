@@ -43,8 +43,7 @@
                             <label for="vehical_type" class="col-md-4 col-form-label text-md-right">{{ __('Vehical Type') }}</label>
 
                             <div class="col-md-6">
-                                <input id="vehical_type" type="vehical_type" class="form-control @error('vehical_type') is-invalid @enderror" name="vehical_type" value="{{ old('vehical_type') }}" required autocomplete="vehical_type">
-
+                                <input id="vehical_type" type="vehical_type" class="form-control @error('vehical_type') is-invalid @enderror" name="vehical_type" placeholder="Two wheeler/four wheeler" value="{{ old('vehical_type') }}" required autocomplete="vehical_type">
                                 @error('vehical_type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

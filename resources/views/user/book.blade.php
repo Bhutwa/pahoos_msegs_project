@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 @section('content')   
-<div class="l-navbar" id="nav-bar">
+{{-- <div class="l-navbar" id="nav-bar">
     <nav class="nav">
         <div> <a href="/home" class="nav_logo"> <i class='bx bxs-car-garage nav_logo-icon'></i> <span class="nav_logo-name">PahooS</span> </a>
             <div class="nav_list"> 
@@ -39,7 +39,8 @@
         </form>
         
     </nav>
-</div>
+</div> --}}
+@include('layouts.usersidebar')
     <!--Container Main start-->
        
     <div class="row justify-content-center">

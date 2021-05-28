@@ -24,27 +24,11 @@
                 <a href="/admin/home" class="dash-nav-item">
                     <i class="fas fa-home"></i> Home </a> 
                 <a href="/add-slot" class="dash-nav-item">                  
-                    <i class="fas fa-parking"></i> Slots </a>
-                        <a href="#" class="dash-nav-item">                  
+                    <i class="fas fa-parking"></i>Add Slots </a>
+                        <a href="/feedbacks" class="dash-nav-item">                  
                     <i class="fas fa-comment"></i> Feedbacks </a>
-                <div class="dash-nav-dropdown">
-                    <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
-                        <i class="fas fa-file"></i> Layouts </a>
-                    <div class="dash-nav-dropdown-menu">
-                        <a href="blank.html" class="dash-nav-dropdown-item">Blank</a>
-                        <a href="content.html" class="dash-nav-dropdown-item">Content</a>
-                        <a href="login.html" class="dash-nav-dropdown-item">Log in</a>
-                        <a href="signup.html" class="dash-nav-dropdown-item">Sign up</a>
-                    </div>
-                </div>
-                <div class="dash-nav-dropdown">
-                    <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
-                        <i class="fas fa-info"></i> About </a>
-                    <div class="dash-nav-dropdown-menu">
-                        <a href="https://github.com/HackerThemes/spur-template" target="_blank" class="dash-nav-dropdown-item">GitHub</a>
-                        <a href="http://hackerthemes.com" target="_blank" class="dash-nav-dropdown-item">HackerThemes</a>
-                    </div>
-                </div>
+                    <a href="#" class="dash-nav-item">                  
+                        <i class="fas fa-users"></i>All Users</a>
             </nav>
         </div>
         <div class="dash-app">

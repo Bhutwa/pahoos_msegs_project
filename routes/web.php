@@ -49,10 +49,15 @@ Route::get('/admin/home' , function(){
             ->select('users.name', 'slots.location','user_slot.id')->get();
     return view('admin.home',['bookingdetails'=> $bookingdetails]);
 });
+
+Route::get('/feedbacks',function(){
+    return view('admin.feedbacks');
+});
 //<-----------Piviot Table Route -------->>
 Route::get('/add-slot',function(){
     return view('/admin/addSlot');
 });
+
 //-----------------------------END ----------------------------------------
 
 

@@ -2,7 +2,7 @@
 {{-- {{dd($bookingdetails)}} --}}
 {!! $map['js'] !!}
 @section('content')   
-    <div class="l-navbar" id="nav-bar">
+    {{-- <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="#" class="nav_logo"> <i class='bx bxs-car-garage nav_logo-icon'></i> <span class="nav_logo-name">PahooS</span> </a>
                 <div class="nav_list"> 
@@ -40,7 +40,8 @@
             </form>
             
         </nav>
-    </div>
+    </div> --}}
+    @include('layouts.usersidebar')
     <!--Container Main start-->
     <div class="container">
         {!! $map['html'] !!}
