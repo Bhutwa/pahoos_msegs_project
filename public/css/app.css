@@ -6,6 +6,34 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ .marquee {
+    height: 25px;
+    width: 1200px;
+  
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .marquee div {
+    display: block;
+    width: 200%;
+    height: 30px;
+  
+    position: absolute;
+    overflow: hidden;
+  
+    animation: marquee 13s linear infinite;
+  }
+  
+  .marquee span {
+    float: left;
+    width: 50%;
+  }
+  
+  @keyframes marquee {
+    0% { left: 0; }
+    100% { left: -100%; }
+  }
 .form-control {
     margin: 0 auto;
 }

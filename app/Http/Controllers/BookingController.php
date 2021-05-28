@@ -83,14 +83,20 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $booking = DB::table('user_slot')->find(Input::get('id'));
-            $booking->loaction       = Input::get('loaction');
-            $booking->start      = Input::get('start');
-            $booking->end = Input::get('end');
-            $booking->save();
-            return back();
+    public function edit(Request $request,$booking_id)
+    { 
+        $slot=Slot::where('location', $request->slot_location)->first();
+        // $slot_id=$slot->id;
+        $booking = DB::table('user_slot')
+                    ->where('id',$booking_id)
+                    ->update([
+                        'slot_id' => $slot->id,
+                        'start'  =>$request->start,
+                        'end'       =>$request->end
+                                            ]);
+            return redirect('/home');
+                    
+                    
     }
 
     /**
@@ -100,9 +106,9 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+       
     }
 
     /**
@@ -111,9 +117,11 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$booking_id)
     {
-        //
+        dd($booking_id);
+       $deleteBooking=DB::table('user_slot')->where('id','=',$booking_id)->delete();
+        return redirect('/home');   
     }
     public function feedback(Request $request)
     {
