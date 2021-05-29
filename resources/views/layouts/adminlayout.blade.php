@@ -27,7 +27,7 @@
                     <i class="fas fa-parking"></i>Add Slots </a>
                         <a href="/feedbacks" class="dash-nav-item">                  
                     <i class="fas fa-comment"></i> Feedbacks </a>
-                    <a href="#" class="dash-nav-item">                  
+                    <a href="/user-details" class="dash-nav-item">                  
                         <i class="fas fa-users"></i>All Users</a>
             </nav>
         </div>

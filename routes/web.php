@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Slot;
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,12 +48,21 @@ Route::get('/admin/home' , function(){
     $bookingdetails = DB::table('user_slot')
             ->join('users', 'users.id', '=', 'user_slot.user_id')
             ->join('slots', 'slots.id', '=', 'user_slot.slot_id')
-            ->select('users.name', 'slots.location','user_slot.id')->get();
+            ->select('users.name', 'slots.location','user_slot.id','user_slot.start','user_slot.end')->get();
     return view('admin.home',['bookingdetails'=> $bookingdetails]);
 });
 
 Route::get('/feedbacks',function(){
-    return view('admin.feedbacks');
+    $feedbacks=DB::table('feedbacks')
+                    ->join('users','users.id','=','feedbacks.user_id')
+                    ->select('feedbacks.rating','feedbacks.feedback_message','users.name')->get();
+                    // dd($feedbacks);
+    return view('admin.feedbacks',['feedbacks'=>$feedbacks]);
+});
+
+Route::get('/user-details',function(){
+    $users=User::where('id','<>',2)->get();
+    return view('admin.allusers',['users'=> $users]);
 });
 //<-----------Piviot Table Route -------->>
 Route::get('/add-slot',function(){
