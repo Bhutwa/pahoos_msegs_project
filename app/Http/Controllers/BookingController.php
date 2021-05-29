@@ -31,28 +31,28 @@ class BookingController extends Controller
 
         $validator = Validator::make($request->all(),[
             'location'  => 'required',
-            'start'  => 'required|date_format:h:iA',
+            'start'  => 'required|unique:user_slot,start|date_format:h:iA',
             'end'    => 'required|date_format:h:iA|after:start',
           ]);
+          if(!$validator)
+          dd($validator);
         $location=$request->slot_location;
-        // $slot_id=DB::select('select id from slots where location = ?', [$location]);
-        $slot_id=DB::table('slots')->where('location', $location)->value('id');
-        $slot_count=DB::table('user_slot')->where('slot_id',$slot_id)->count();
-        if($slot_count<DB::table('slots')->select('space')->value('space') && $validator){
-        var_dump($slot_count);
-        $user_id= Auth::id();
-        DB::table('user_slot')
+            $slot_id=Slot::where('location','=', $location)->value('id');
+            $slot_count=DB::table('user_slot')->where('slot_id',$slot_id)->count();
+                if($slot_count<(Slot::select('space')->value('space') && $validator)){                
+                
+                DB::table('user_slot')
                     ->insert([
-                        'user_id'=> $user_id,
+                        'user_id'=> Auth::id(),
                         'slot_id'=>$slot_id,
                         'start' => $request->start,
                         'end' => $request->end
                     ]);
                     return back()->with('success', 'Booked Parking Slot Successfully');
-        }
-        else {
-            return back()->with('error', 'No Space Available in this location ,Please Select another !');
-        }
+                }
+                else{
+                    return back()->with('error', 'No Space Available in this location or Time slot already booked ,Please Select another !');
+                    }
     }
 
     /**

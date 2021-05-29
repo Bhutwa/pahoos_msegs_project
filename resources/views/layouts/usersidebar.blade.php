@@ -1,6 +1,6 @@
 <div class="l-navbar" id="nav-bar">
     <nav class="nav">
-        <div> <a style="text-decoration:none" href="/" class="nav_logo"> <i class='bx bxs-car-garage nav_logo-icon'></i> <span class="nav_logo-name">PahooS</span> </a>
+        <div> <a style="text-decoration:none" href="/home" class="nav_logo"> <i class='bx bxs-car-garage nav_logo-icon'></i> <span class="nav_logo-name">PahooS</span> </a>
             <div class="nav_list"> 
                 <a style="text-decoration:none" href="/home" class="nav_link active"> 
                     <i class='bx bx-grid-alt nav_icon'></i> 
