@@ -9,7 +9,9 @@
                            {{ __('A fresh mail has been sent to your email address.') }}
                        </div>
                    @endif
-                   {!! $content !!}
+                   <p><b>PAHOOS PARKING BOOKING SYSTEM</b></p>
+                   <p>{{$emails['subject']}}
+                    <p>{{ $emails['content'] }}.</p>
                </div>
            </div>
        </div>

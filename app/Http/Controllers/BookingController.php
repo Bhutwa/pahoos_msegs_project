@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 use App\Slot;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Rule;
+use App\Mail\sendingEmail;
 
 class BookingController extends Controller
 {
@@ -37,10 +37,10 @@ class BookingController extends Controller
           ]);
           $taken = DB::table('user_slot')
            ->where('slot_id', '=', $slot_id)
-           ->where('start','<>',$request->start)->get();
+           ->where('start','=',$request->start)->get();
             // dd($taken);
             $slot_count=DB::table('user_slot')->where('slot_id',$slot_id)->count();
-                if($slot_count<(Slot::select('space')->value('space')) && $validator && (count($taken))){                
+                if($slot_count<(Slot::select('space')->value('space')) && $validator && (count($taken))<1){                
                 
                 DB::table('user_slot')
                     ->insert([
@@ -55,17 +55,14 @@ class BookingController extends Controller
                     ->where('user_id',Auth::id())
                     ->where('slot_id',$slot_id)
                     ->get();
+                    $to_mail=Auth::user()->email;
                     $data=[
                         'subject' => 'BOOKING CONFIRMED',
-                        'email'   => Auth::user()->email,
                         'content' => 'Thank you For booking with us .Your Booking id is PAH000', $id,' Your booking is from ',$request->start,'to',$request->end,'Plaese pay the booking amount to the cashier before entering the building .THANK YOU "Your vehicle is safe with us".',
                         
                     ];
-
-                    // Mail::send('email-template', $data, function($message) use ($data) {
-                    //     $message->to($data['email'])
-                    //     ->subject($data['subject']);
-                    //   });
+                    $email=Auth::user()->email;
+                    Mail::to($to_mail)->send(new sendingEmail($data));
 
                     return back()->with('success', 'Booked Parking Slot Successfully');
                 }
@@ -154,25 +151,5 @@ class BookingController extends Controller
             return redirect('/home');
     }
 
-    public function sendEmail(Request $request)
-    {
-        $request->validate([
-          'email' => 'required|email',
-          'subject' => 'required',
-          'content' => 'required',
-        ]);
-
-        $data = [
-          'subject' => $request->subject,
-          'email' => $request->email,
-          'content' => $request->content
-        ];
-
-        Mail::send('email-template', $data, function($message) use ($data) {
-          $message->to($data['email'])
-          ->subject($data['subject']);
-        });
-
-        return back()->with(['message' => 'Email successfully sent!']);
-    }
+    
 }
