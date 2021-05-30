@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.usersidebar')
     <!--Container Main start-->
-    
+    @if ($count)
     <div class="height-50 bg-light">           
         <div class="container">
             <div class="marquee">
@@ -131,6 +131,12 @@
             <p>© 2021 Msegs</p>
             </div>   
     </div>
+}
+@else
+<div class="card" style="text-align: center;">
+    <h4>No Bookings done by you.Get started</h4>
+    <a href="{{route('slots.index')}}" >Book now</a>
+    @endif
     {{-- <div class="container-xl">
         <div class="table-responsive">
             <div class="table-wrapper">

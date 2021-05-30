@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 use App\Slot;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 class BookingController extends Controller
 {
@@ -28,18 +29,18 @@ class BookingController extends Controller
      */
     public function create(Request $request)
     {
-
+        $slot_id=Slot::where('location','=', $request->slot_location)->value('id');
         $validator = Validator::make($request->all(),[
             'location'  => 'required',
-            'start'  => 'required|unique:user_slot,start|date_format:h:iA',
+            'start'  => 'required|date_format:h:iA',
             'end'    => 'required|date_format:h:iA|after:start',
           ]);
-          if(!$validator)
-          dd($validator);
-        $location=$request->slot_location;
-            $slot_id=Slot::where('location','=', $location)->value('id');
+          $taken = DB::table('user_slot')
+           ->where('slot_id', '=', $slot_id)
+           ->where('start','<>',$request->start)->get();
+            // dd($taken);
             $slot_count=DB::table('user_slot')->where('slot_id',$slot_id)->count();
-                if($slot_count<(Slot::select('space')->value('space') && $validator)){                
+                if($slot_count<(Slot::select('space')->value('space')) && $validator && (count($taken))){                
                 
                 DB::table('user_slot')
                     ->insert([
@@ -48,6 +49,24 @@ class BookingController extends Controller
                         'start' => $request->start,
                         'end' => $request->end
                     ]);
+                    
+                    $id=DB::table('user_slot')
+                    ->select('id')
+                    ->where('user_id',Auth::id())
+                    ->where('slot_id',$slot_id)
+                    ->get();
+                    $data=[
+                        'subject' => 'BOOKING CONFIRMED',
+                        'email'   => Auth::user()->email,
+                        'content' => 'Thank you For booking with us .Your Booking id is PAH000', $id,' Your booking is from ',$request->start,'to',$request->end,'Plaese pay the booking amount to the cashier before entering the building .THANK YOU "Your vehicle is safe with us".',
+                        
+                    ];
+
+                    // Mail::send('email-template', $data, function($message) use ($data) {
+                    //     $message->to($data['email'])
+                    //     ->subject($data['subject']);
+                    //   });
+
                     return back()->with('success', 'Booked Parking Slot Successfully');
                 }
                 else{
@@ -133,5 +152,27 @@ class BookingController extends Controller
                 'feedback_message' => $request->feedback_message
             ]);
             return redirect('/home');
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $request->validate([
+          'email' => 'required|email',
+          'subject' => 'required',
+          'content' => 'required',
+        ]);
+
+        $data = [
+          'subject' => $request->subject,
+          'email' => $request->email,
+          'content' => $request->content
+        ];
+
+        Mail::send('email-template', $data, function($message) use ($data) {
+          $message->to($data['email'])
+          ->subject($data['subject']);
+        });
+
+        return back()->with(['message' => 'Email successfully sent!']);
     }
 }

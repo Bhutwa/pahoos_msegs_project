@@ -37,6 +37,7 @@ Route::get('/home', function(){
     ->join('users', function ($join) {
         $join->on('user_slot.user_id', '=', 'users.id');
     })
+    ->where('user_slot.user_id',Auth::id())
     ->select('user_slot.id','slots.location','users.name','user_slot.start','user_slot.end')
     ->get();
     $count=count($bookingdetails);

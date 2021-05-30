@@ -59,6 +59,7 @@
     <div class="card  border-primary mb-3">
         <div class="card-header" style="text-align:center">Book Parking Slot</div>
             <div class="card-body" >
+                <form action="{{route('bookings.create')}}" method="get">
                 <div class="form-group" style="display:flex;flex-wrap: wrap;align-items: center; ">            
                     <label for="start" >From_:</label>
                     <input id="start" type="time" class="col-4 form-control" name="start" value="00:00:00" style="text-allign:center" >
@@ -69,7 +70,7 @@
                 </div>
                 <div class="form-group"style="display:flex;flex-wrap: wrap;align-items: center;" >
                 <label for="country" style="display : inline; padding-right : 4px;">Select Location:</label>
-                    <form action="{{route('bookings.create')}}" method="get">
+                    
                         <select name="slot_location" id="slot_location"class="form-control" style="text-align-last:center; width:225px;margin-left :130px;">
                             <option value="" >Select Location</option>
                             @foreach ($slots as $location)
