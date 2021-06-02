@@ -185,7 +185,7 @@ $(document).ready(function(){
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="table-data">
                 <thead>
                     <tr>
                         <th >Booking ID</th>
@@ -207,9 +207,37 @@ $(document).ready(function(){
                 @endforeach
                 </tbody>
             </table>
-        </div>
+            {!! $bookingdetails->links() !!}
+        </div>        
     </div>
 </div>
-                                        
+@push('scripts')
+<script>
+    $(document).ready(function(){
+    
+     $(document).on('click', '.page-link', function(event){
+        event.preventDefault(); 
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+     });
+    
+     function fetch_data(page)
+     {
+      var _token = $("input[name=_token]").val();
+      $.ajax({
+          url:"{{ route('bookings.adminFetch') }}",
+          method:"POST",
+          data:{_token:_token, page:page},
+          success:function(data)
+          {
+           $('#table_data').html(data);
+          }
+        });
+     }
+    
+    });
+    </script>  
+        
+@endpush                             
 @endsection
             

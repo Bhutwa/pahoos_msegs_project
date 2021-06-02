@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover" id="table_data">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -54,7 +54,7 @@
                                         <input type="hidden" name="_method" value="DELETE" />
                                         @csrf
                                         <div class="modal-header">						
-                                            <h4 class="modal-title">Delete Employee</h4>
+                                            <h4 class="modal-title">Delete Booking</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         </div>
                                         <div class="modal-body">					
@@ -113,25 +113,27 @@
                         @endforeach
                         
                     </tbody>
-                </table>                
+                </table>                                
             </div>
+            {!! $bookingdetails->links() !!}
         </div>
-        <div class="clearfix" style="padding-left: 1110px">
+        
+        {{-- <div class="clearfix" style="padding-left: 1110px">
             <div class="hint-text">Showing <b>{{$count}}</b> entries</div>
             <ul class="pagination">
                 <li class="page-item "><a href="#"class="page-link">Previous</a></li>
                 <li class="page-item"><a href="#" class="page-link">Next</a></li>
             </ul>
-        </div>
+        </div> --}}
     </div>
     
-    <div class="footer">       
-        <img src="image/park.png" style="width:100%;height:200px;">
+    <div class="footer" style="padding-top: 100px" >       
+        <img src="image/park.png" style="width:100%;height:170px;">
         <div class="container" style="text-align:center">
             <p>© 2021 Msegs</p>
             </div>   
     </div>
-}
+
 @else
 <div class="card" style="text-align: center;">
     <h4>No Bookings done by you.Get started</h4>
@@ -237,6 +239,33 @@
     </div>
      --}}
     <!--Container Main end-->
+@push('scripts')
+<script>
+    $(document).ready(function(){
     
+     $(document).on('click', '.page-link', function(event){
+        event.preventDefault(); 
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+     });
+    
+     function fetch_data(page)
+     {
+      var _token = $("input[name=_token]").val();
+      $.ajax({
+          url:"{{ route('bookings.fetch') }}",
+          method:"POST",
+          data:{_token:_token, page:page},
+          success:function(data)
+          {
+           $('#table_data').html(data);
+          }
+        });
+     }
+    
+    });
+    </script>
+@endpush    
 @endsection
+
 

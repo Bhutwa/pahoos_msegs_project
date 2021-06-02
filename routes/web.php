@@ -30,6 +30,9 @@ Route::resource('bookings','\App\Http\Controllers\BookingController');
 // <<-------------Home Page Routes------------------->>
 Route::get('/', 'HomeController@index');
 //---------------------USER
+Route::get('/bookings/fetch', 'BookingController@fetch')->name('bookings.fetch');
+
+
 Route::get('/home', function(){
     $slots= Slot::select('location')->get();
     $bookingdetails=DB::table('user_slot')
@@ -39,17 +42,18 @@ Route::get('/home', function(){
     })
     ->where('user_slot.user_id',Auth::id())
     ->select('user_slot.id','slots.location','users.name','user_slot.start','user_slot.end')
-    ->get();
-    $count=count($bookingdetails);
-    return view('home', ['bookingdetails' => $bookingdetails,'count' => $count,'slots' => $slots]);
+    ->simplePaginate(4);
+    // $count=count($bookingdetails);
+    return view('home', ['bookingdetails' => $bookingdetails,'count' => 4,'slots' => $slots]);
 });
 
 //----------------------ADMIN------Routes---------------------------------
+Route::get('bookings.adminFetch','BookingController@fetchAdmin')->name('bookings.adminFetch');
 Route::get('/admin/home' , function(){
     $bookingdetails = DB::table('user_slot')
             ->join('users', 'users.id', '=', 'user_slot.user_id')
             ->join('slots', 'slots.id', '=', 'user_slot.slot_id')
-            ->select('users.name', 'slots.location','user_slot.id','user_slot.start','user_slot.end')->get();
+            ->select('users.name', 'slots.location','user_slot.id','user_slot.start','user_slot.end')->simplePaginate(7);
     return view('admin.home',['bookingdetails'=> $bookingdetails]);
 });
 

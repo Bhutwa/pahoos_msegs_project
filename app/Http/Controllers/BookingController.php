@@ -12,6 +12,33 @@ use App\Mail\sendingEmail;
 
 class BookingController extends Controller
 {
+    function adminFetch(Request $request){
+        if($request->ajax()){
+            $bookingdetails = DB::table('user_slot')
+            ->join('users', 'users.id', '=', 'user_slot.user_id')
+            ->join('slots', 'slots.id', '=', 'user_slot.slot_id')
+            ->select('users.name', 'slots.location','user_slot.id','user_slot.start','user_slot.end')->simplePaginate(7);
+    return view('admin.home',['bookingdetails'=> $bookingdetails])->render();
+        }
+    }
+
+    function fetch(Request $request)
+    {
+     if($request->ajax())
+     {
+      $data =  $slots= Slot::select('location')->get();
+      $bookingdetails=DB::table('user_slot')
+      ->join('slots','slots.id','=','user_slot.slot_id')
+      ->join('users', function ($join) {
+          $join->on('user_slot.user_id', '=', 'users.id');
+      })
+      ->where('user_slot.user_id',Auth::id())
+      ->select('user_slot.id','slots.location','users.name','user_slot.start','user_slot.end')
+      ->simplePaginate(4);
+    //   $count=count($bookingdetails);
+      return view('home', ['bookingdetails' => $bookingdetails,'count' => 4,'slots' => $slots])->render();
+     }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,10 +88,13 @@ class BookingController extends Controller
                         'content' => 'Thank you For booking with us .Your Booking id is PAH000', $id,' Your booking is from ',$request->start,'to',$request->end,'Plaese pay the booking amount to the cashier before entering the building .THANK YOU "Your vehicle is safe with us".',
                         
                     ];
-                    $email=Auth::user()->email;
-                    Mail::to($to_mail)->send(new sendingEmail($data));
-
-                    return back()->with('success', 'Booked Parking Slot Successfully');
+                    // $email=Auth::user()->email;
+                    // if(Mail::to($to_mail)->send(new sendingEmail($data)))                    
+                    // {return back()->with('success', 'Booked Parking Slot Successfully');
+                    // }
+                    // else {
+                        return back()->with('success', 'Booked Parking Slot Successfully');
+                    
                 }
                 else{
                     return back()->with('error', 'No Space Available in this location or Time slot already booked ,Please Select another !');

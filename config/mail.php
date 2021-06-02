@@ -86,7 +86,7 @@ return [
 
     'username' => env('superrahul23@gmail.com'),
 
-    'password' => env('rhcwzrxioikyfuyq'),
+    'password' => env('Nunu2222'),
 
     /*
     |--------------------------------------------------------------------------
@@ -132,5 +132,6 @@ return [
     */
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
+
 
 ];
