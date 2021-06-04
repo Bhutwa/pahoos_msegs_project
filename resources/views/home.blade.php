@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.usersidebar')
     <!--Container Main start-->
-    @if ($count)
+    @if ($bookingdetails->items())
     <div class="height-50 bg-light">           
         <div class="container">
             <div class="marquee">

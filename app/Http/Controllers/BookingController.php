@@ -35,8 +35,7 @@ class BookingController extends Controller
       ->where('user_slot.user_id',Auth::id())
       ->select('user_slot.id','slots.location','users.name','user_slot.start','user_slot.end')
       ->simplePaginate(4);
-    //   $count=count($bookingdetails);
-      return view('home', ['bookingdetails' => $bookingdetails,'count' => 4,'slots' => $slots])->render();
+      return view('home', ['bookingdetails' => $bookingdetails,'slots' => $slots])->render();
      }
     }
     /**

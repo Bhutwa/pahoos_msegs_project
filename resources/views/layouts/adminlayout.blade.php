@@ -18,7 +18,7 @@
                 <a href="#!" class="menu-toggle">
                     <i class="fas fa-bars"></i>
                 </a>
-                <a href="index.html" class="spur-logo"><i class="fas fa-car"></i> <span>Admin</span></a>
+                <a href="/admin/home" class="spur-logo"><i class="fas fa-car"></i> <span>Admin</span></a>
             </header>
             <nav class="dash-nav-list">
                 <a href="/admin/home" class="dash-nav-item">
@@ -33,25 +33,25 @@
         </div>
         <div class="dash-app">
             <header class="dash-toolbar">
-                <a href="#!" class="menu-toggle">
+                {{-- <a href="#!" class="menu-toggle">
                     <i class="fas fa-bars"></i>
-                </a>
-                <a href="#!" class="searchbox-toggle">
+                </a> --}}
+                {{-- <a href="#!" class="searchbox-toggle">
                     <i class="fas fa-search"></i>
-                </a>
-                <form class="searchbox" action="#!">
+                </a> --}}
+                {{-- <form class="searchbox" action="#!">
                     <a href="#!" class="searchbox-toggle"> <i class="fas fa-arrow-left"></i> </a>
                     <button type="submit" class="searchbox-submit"> <i class="fas fa-search"></i> </button>
                     <input type="text" class="searchbox-input" placeholder="type to search">
-                </form>
+                </form> --}}
                 <div class="tools">
                     <a href="https://github.com/HackerThemes/spur-template" target="_blank" class="tools-item">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="#!" class="tools-item">
+                    {{-- <a href="#!" class="tools-item">
                         <i class="fas fa-bell"></i>
                         <i class="tools-item-count">4</i>
-                    </a>
+                    </a> --}}
                     <div class="dropdown tools-item">
                         <a href="#" class="" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i>

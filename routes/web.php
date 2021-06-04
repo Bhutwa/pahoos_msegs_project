@@ -43,8 +43,8 @@ Route::get('/home', function(){
     ->where('user_slot.user_id',Auth::id())
     ->select('user_slot.id','slots.location','users.name','user_slot.start','user_slot.end')
     ->simplePaginate(4);
-    // $count=count($bookingdetails);
-    return view('home', ['bookingdetails' => $bookingdetails,'count' => 4,'slots' => $slots]);
+    // dd($bookingdetails->items());
+    return view('home', ['bookingdetails' => $bookingdetails,'slots' => $slots]);
 });
 
 //----------------------ADMIN------Routes---------------------------------
